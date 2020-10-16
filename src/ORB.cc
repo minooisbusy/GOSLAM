@@ -263,25 +263,21 @@ static int bit_pattern_31_[256*4] =
 };
 namespace GOSLAM
 {
-static int HALF_PATCH_SIZE=15;
-    ORB::ORB(int _nFeatures, float _fScaleFactor, float _nLevels, float _fIniThFAST, float _fMinThFAST):nfeatures(_nFeatures), scaleFactor(_fScaleFactor), nlevels(_nLevels), fIniThFAST(_fIniThFAST), fMinThFAST(_fMinThFAST)
+const int PATCH_SIZE = 31;
+const int HALF_PATCH_SIZE = 15;
+const int EDGE_THRESHOLD = 19;
+ORB::ORB(int _nFeatures, float _fScaleFactor, float _nLevels, float _fIniThFAST, float _fMinThFAST):nfeatures(_nFeatures), scaleFactor(_fScaleFactor), nlevels(_nLevels), fIniThFAST(_fIniThFAST), fMinThFAST(_fMinThFAST)
 {
     mvScaleFactor.resize(nlevels);
-    //mvLevelSigma2.resize(nlevels);
     mvScaleFactor[0]=1.0f;
-    //mvLevelSigma2[0]=1.0f;
     for(int i=1; i<nlevels; i++)
     {
         mvScaleFactor[i]=mvScaleFactor[i-1]*scaleFactor; // multiply i-1 th scaleFactor
-        //mvLevelSigma2[i]=mvScaleFactor[i]*mvScaleFactor[i];
     }
 
-    mvInvScaleFactor.resize(nlevels);
-    //mvInvLevelSigma2.resize(nlevels);
-    for(int i=0; i<nlevels; i++)
+    mvInvScaleFactor.resize(nlevels); for(int i=0; i<nlevels; i++)
     {
         mvInvScaleFactor[i]=1.0f/mvScaleFactor[i];
-        //mvInvLevelSigma2[i]=1.0f/mvLevelSigma2[i];
     }
 
     mvImagePyramid.resize(nlevels);

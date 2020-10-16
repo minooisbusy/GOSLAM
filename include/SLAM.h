@@ -16,8 +16,16 @@ public:
     bool Track();
     bool LocalMap();
 private:
-    ORB mORB;
+    //Functional Variables
+    ORB *mORB;
     Tracker mTracker;
+
+    // Camera Vairables
+    Mat mK;
+    Mat mDistCoef;
+    float fps;
+    
+
 };
 
 }

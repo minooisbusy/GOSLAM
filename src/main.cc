@@ -6,6 +6,7 @@
 
 #include<opencv2/core/core.hpp>
 #include"Frame.h"
+#include"ORB.h"
 
 using namespace std;
 void LoadImages(const string &strImagePath, const string &strPathTimes,
@@ -51,6 +52,7 @@ int main(int argc, char** argv)
     cv::Mat im;
 
     //Variables
+    ORB orb; 
     for(int ni=0; ni<nImages; ni++)
     {
         // Read image from file
@@ -72,7 +74,10 @@ int main(int argc, char** argv)
             return 0;
 
         //Feature processing
-        //
+        vector<cv::KeyPoint> vKeyPoints;
+        cv::Mat descriptor;
+        
+        
 
         // Pass the image to the SLAM system
         //SLAM.TrackMonocular(im,tframe);
